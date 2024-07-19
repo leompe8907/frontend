@@ -24,7 +24,7 @@ function Llamada() {
   }, [data, ottHours, listOttEvents]);
 
   const handlesubmit = (e) => {
-    axios.get(`https://backend-mu-virid.vercel.app/telemetria/home/${e}/`)
+    axios.get(`http://localhost:8000/telemetria/home/${e}/`)
       .then(response => {
         const responseData = response.data;
         setData(responseData);

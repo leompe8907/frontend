@@ -21,7 +21,7 @@ function App() {
           {/* <Route path='/DashOTT' element={<DashOTT/>}/>
           <Route path='/DashDVB' element={<DashDVB/>}/>
           <Route path='/llamada' element={<Llamada/>}/> */}
-          <Route path='/Login' element={<Login/>}/>
+          <Route path='/' element={<Login/>}/>
           <Route path='/update' element={<Update/>}/>
           <Route path='/options' element={<OptionsDays/>}/>
         </Routes>

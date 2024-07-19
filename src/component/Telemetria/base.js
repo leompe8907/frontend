@@ -10,7 +10,6 @@ const Telemetria = () => {
   const limit = 1000;
 
   const stopFetchingRef = useRef(true);
-
   const handleStopFetching = (status) => {
     stopFetchingRef.current = status;
     setIsFetching(false);
@@ -93,36 +92,45 @@ const Telemetria = () => {
     try {
       let currentPage = 0;
       let allTelemetryData = {};
+      let foundRecord = false;
   
       while (stopFetchingRef.current) {
         const data = await fetchDataFromPage(currentPage);
         if (data.length === 0) break;
   
-        data.forEach(record => {
+        for (let record of data) {
+          if (record.recordId === highestRecordId) {
+            foundRecord = true;
+            handleStopFetching(false);
+            break;
+          }
+  
           const modifiedRecord = {
             ...record,
             dataDate: getDataDate(record.timestamp),
             timeDate: getTimeDate(record.timestamp)
           };
           allTelemetryData[record.recordId] = modifiedRecord;
+        }
   
-          if (record.recordId === highestRecordId) {
-            console.log("entre aca")
-            handleStopFetching(false);
-            return;
-          }
-        });
+        if (foundRecord) {
+          break;
+        }
   
         currentPage += limit;
       }
   
-      setTelemetriaData(allTelemetryData);
-      await sendDataToDjango(Object.values(allTelemetryData));
+      if (Object.keys(allTelemetryData).length > 0) {
+        setTelemetriaData(allTelemetryData);
+        await sendDataToDjango(Object.values(allTelemetryData));
+      }
+  
     } catch (error) {
       console.error('Error fetching telemetry data:', error);
       handleStopFetching(null);
     }
   };
+  
 
   const chunkArray = (array, chunkSize) => {
     const chunks = [];

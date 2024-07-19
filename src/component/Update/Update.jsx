@@ -11,46 +11,46 @@ export default function Update() {
     endvod: null,
   });
 
-  //https://backend-mu-virid.vercel.app/
+  //https://telemetry-backend-63c0ea80a20c.herokuapp.com/
 
   const handlesubmit = async () => {
     try {
-      const dvbResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/dvb/');
+      const dvbResponse = await axios.post('http://localhost:8000/telemetria/dvb/');
       setResponses(prevState => ({ ...prevState, dvb: dvbResponse.data }));
     } catch (error) {
       console.error('Error:', error);
     }
 
     try {
-      const ottResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/ott/');
+      const ottResponse = await axios.post('http://localhost:8000/telemetria/ott/');
       setResponses(prevState => ({ ...prevState, ott: ottResponse.data }));
     } catch (error) {
       console.error('Error:', error);
     }
 
     try {
-      const stopcatchupResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/stopcatchup/');
+      const stopcatchupResponse = await axios.post('http://localhost:8000/telemetria/stopcatchup/');
       setResponses(prevState => ({ ...prevState, stopcatchup: stopcatchupResponse.data }));
     } catch (error) {
       console.error('Error:', error);
     }
 
     try {
-      const endcatchupResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/endcatchup/');
+      const endcatchupResponse = await axios.post('http://localhost:8000/telemetria/endcatchup/');
       setResponses(prevState => ({ ...prevState, endcatchup: endcatchupResponse.data }));
     } catch (error) {
       console.error('Error:', error);
     }
 
     try {
-      const stopvodResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/stopvod/');
+      const stopvodResponse = await axios.post('http://localhost:8000/telemetria/stopvod/');
       setResponses(prevState => ({ ...prevState, stopvod: stopvodResponse.data }));
     } catch (error) {
       console.error('Error:', error);
     }
 
     try {
-      const endvodResponse = await axios.post('https://backend-mu-virid.vercel.app/telemetria/endvod/');
+      const endvodResponse = await axios.post('http://localhost:8000/telemetria/endvod/');
       setResponses(prevState => ({ ...prevState, endvod: endvodResponse.data }));
     } catch (error) {
       console.error('Error:', error);
