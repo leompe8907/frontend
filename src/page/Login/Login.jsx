@@ -51,7 +51,7 @@ function Login() {
           localStorage.setItem("cvPass",password)
           localStorage.setItem("cvToken",cvToken)
           onWindLoad()
-          navigate('/telemetria')
+          navigate('/options')
         }else{
             alert("failed to fetch result"+result["errorMessage"])
         }

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Chart from "chart.js/auto";
 
 function NocheOTT({ responseData }) {
@@ -39,9 +40,24 @@ function NocheOTT({ responseData }) {
         }]
       },
       options: {
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            rotation: -95,
+            color: 'black',
+          }
+        },
         scales: {
+          x: {
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 90,
+            }
+          },
           y: {
-            beginAtZero: true
+            type: 'logarithmic',
+            beginAtZero: true,
           }
         }
       }

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import Chart from "chart.js/auto";
 
 function MañanaOTT({ responseData }) {
@@ -28,6 +29,7 @@ function MañanaOTT({ responseData }) {
 
     chartInstance.current = new Chart(ctx, {
       type: 'bar',
+      plugins: [ChartDataLabels],
       data: {
         labels: MañanaArray.map(item => item.channel),
         datasets: [{
@@ -39,9 +41,24 @@ function MañanaOTT({ responseData }) {
         }]
       },
       options: {
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            rotation: -95,
+            color: 'black',
+          }
+        },
         scales: {
+          x: {
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 90,
+            }
+          },
           y: {
-            beginAtZero: true
+            type: 'logarithmic',
+            beginAtZero: true,
           }
         }
       }
